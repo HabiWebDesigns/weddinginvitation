@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jane &amp; Joe — Wedding Invitation</title>
+  <meta name="description" content="You are invited to the wedding of Jane and Joe on June 20, 2027.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="locked">
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="sprig" viewBox="0 0 120 40">
+      <path d="M2 20 Q60 6 118 20" fill="none" stroke="currentColor" stroke-width="1.2" />
+      <g fill="currentColor" opacity=".85">
+        <path d="M20 17 q-4-12 8-14 q4 10-8 14z" />
+        <path d="M20 19 q-4 12 8 14 q4-10-8-14z" />
+        <path d="M48 13 q-3-12 9-13 q3 10-9 13z" />
+        <path d="M48 15 q-3 12 9 13 q3-10-9-13z" />
+        <path d="M78 13 q3-12 -9-13 q-3 10 9 13z" />
+        <path d="M78 15 q3 12 -9 13 q-3-10 9-13z" />
+        <path d="M102 17 q4-12 -8-14 q-4 10 8 14z" />
+        <path d="M102 19 q4 12 -8 14 q-4-10 8-14z" />
+      </g>
+      <circle cx="60" cy="10" r="3" fill="#B9975B" />
+    </symbol>
+    <!-- Outfit illustrations: colour comes from CSS var --c -->
+    <symbol id="gown" viewBox="0 0 100 200">
+      <circle cx="50" cy="18" r="11" fill="#E9D9C4" />
+      <path d="M38 34h24l4 40-8 6h-16l-8-6z" fill="var(--c)" />
+      <path d="M42 80h16l32 112H10z" fill="var(--c)" />
+      <path d="M42 80h16" stroke="#B9975B" stroke-width="3" />
+      <path d="M30 150q20 14 40 0M24 175q26 14 52 0" stroke="#fff" stroke-opacity=".35" fill="none" />
+    </symbol>
+    <symbol id="suit" viewBox="0 0 100 200">
+      <circle cx="50" cy="18" r="11" fill="#E9D9C4" />
+      <path d="M30 36l20-4 20 4 8 70H22z" fill="var(--c)" />
+      <path d="M50 32l-10 34 10 40 10-40z" fill="#fff" fill-opacity=".9" />
+      <path d="M50 40l-4 6 4 28 4-28z" fill="var(--t,#2F4A3A)" />
+      <path d="M30 36l20 70-8-68zM70 36l-20 70 8-68z" fill="#000" fill-opacity=".14" />
+      <path d="M26 104h22l-2 90H30zM52 104h22l-4 90H54z" fill="var(--c)" />
+      <path d="M26 104h48" stroke="#000" stroke-opacity=".2" />
+    </symbol>
+  </svg>
+
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <!-- ===== DOOR INTRO ===== -->
+  <section class="intro" id="intro" aria-label="Garden door">
+    <p class="intro-hint">A special invitation awaits…</p>
+    <div class="door-wrap">
+      <div class="ivy" aria-hidden="true"><svg class="sprig">
+          <use href="#sprig" />
+        </svg></div>
+      <button class="door" id="door" aria-label="Open the garden door">
+        <span class="beyond"><i class="sun"></i><em>Jane &amp; Joe</em><small>welcome to the garden</small></span>
+        <span class="panel left"><span class="inset"></span><span class="knob"></span></span>
+        <span class="panel right"><span class="inset"></span><span class="knob"></span></span>
+        <span class="plaque">J&amp;J</span>
+      </button>
+    </div>
+    <button class="btn" id="openBtn">Open the Door</button>
+  </section>
+
+  <button class="music" id="music" aria-label="Mute music" aria-pressed="true" hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6">
+      <path d="M9 18V6l10-2v12" />
+      <circle cx="6.5" cy="18" r="2.5" />
+      <circle cx="16.5" cy="16" r="2.5" />
+      <path class="slash" d="M3 3l18 18" />
+    </svg>
+  </button>
+  <audio id="audio" src="music/wedding-song.mp3" loop preload="none"></audio>
+
+  <main id="main" aria-hidden="true">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hills" aria-hidden="true"><i></i><i></i><i></i></div>
+      <svg class="sprig top rv">
+        <use href="#sprig" />
+      </svg>
+      <p class="rv">Together with their families</p>
+      <h1 class="rv"><span data-cfg="brideName">Jane</span><i>&amp;</i><span data-cfg="groomName">Joe</span></h1>
+      <p class="rv">invite you to celebrate their wedding</p>
+      <p class="date rv" data-cfg="dateLong">June 20, 2027</p>
+      <button class="btn rv" id="calBtn">Save the Date</button>
+      <a class="scroll" href="#couple" aria-label="Scroll down"><span></span></a>
+    </header>
+
+    <!-- COUPLE -->
+    <section class="photo" id="couple" aria-label="Jane and Joe">
+      <figure class="ph polaroid side a rv" data-label="Garden gazebo"><img data-src="images/stock/gazebo.jpg"
+          alt="A garden gazebo among green trees">
+        <figcaption>The garden</figcaption>
+      </figure>
+      <div class="frame rv">
+        <img id="couplePhoto" data-src="images/couple.jpg" alt="Jane and Joe together" loading="lazy" width="800"
+          height="1000">
+        <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
+      </div>
+      <figure class="ph polaroid side b rv" data-label="Wedding rings"><img data-src="images/stock/rings.jpg"
+          alt="Two gold wedding rings">
+        <figcaption>Our rings</figcaption>
+      </figure>
+    </section>
+
+    <!-- STORY -->
+    <section class="story" aria-labelledby="storyH">
+      <h2 id="storyH" class="script rv">Our Story</h2>
+      <ol class="path">
+        <li class="rv">
+          <figure class="ph thumb" data-label="First hello"><img data-src="images/stock/first-hello.jpg"
+              alt="Two coffee cups on a table"></figure>
+          <h3>The First Hello</h3>
+          <p>Jane and Joe first crossed paths by chance, never realizing that an ordinary moment would become the
+            beginning of something extraordinary.</p>
+        </li>
+        <li class="rv">
+          <figure class="ph thumb" data-label="Beginning"><img data-src="images/stock/beginning.jpg"
+              alt="A winding garden path"></figure>
+          <h3>The Beginning</h3>
+          <p>What started as simple conversations slowly became friendship, laughter, and countless memories.</p>
+        </li>
+        <li class="rv">
+          <figure class="ph thumb" data-label="Journey"><img data-src="images/stock/journey.jpg"
+              alt="A road through the mountains"></figure>
+          <h3>The Journey</h3>
+          <p>Through adventures, challenges, quiet moments, and unforgettable days, their story continued to grow.</p>
+        </li>
+        <li class="rv">
+          <figure class="ph thumb" data-label="Forever"><img data-src="images/stock/forever.jpg"
+              alt="A couple holding hands at sunset"></figure>
+          <h3>Forever</h3>
+          <p>Now, after years of memories together, Jane and Joe are ready to begin their next chapter.</p>
+        </li>
+      </ol>
+    </section>
+
+    <div class="ribbon" aria-hidden="true">
+      <div><span>Save the date ✦ June 20, 2027 ✦ The Enchanted Garden ✦ Garden Formal ✦ #JaneAndJoeForever ✦
+        </span><span>Save the date ✦ June 20, 2027 ✦ The Enchanted Garden ✦ Garden Formal ✦ #JaneAndJoeForever ✦ </span>
+      </div>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown" aria-labelledby="cdH">
+      <h2 id="cdH" class="script rv">Until we say “I do”</h2>
+      <div class="clock rv" id="clock" role="timer" aria-live="off">
+        <div><b id="cd-months">00</b><span>Months</span></div>
+        <div><b id="cd-days">00</b><span>Days</span></div>
+        <div><b id="cd-hours">00</b><span>Hours</span></div>
+        <div><b id="cd-minutes">00</b><span>Minutes</span></div>
+        <div><b id="cd-seconds">00</b><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="details" aria-labelledby="dtH">
+      <h2 id="dtH" class="script rv">Wedding Details</h2>
+      <div class="detail-grid">
+        <article class="rv"><svg viewBox="0 0 24 24">
+            <path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z" />
+            <path d="M9 9h6M12 6v8" />
+          </svg>
+          <h3>Ceremony</h3>
+          <p data-cfg="ceremonyTime">3:00 PM</p>
+        </article>
+        <article class="rv"><svg viewBox="0 0 24 24">
+            <path d="M8 3h8l-1 7a3 3 0 01-6 0z" />
+            <path d="M12 13v8M9 21h6" />
+          </svg>
+          <h3>Reception</h3>
+          <p data-cfg="receptionTime">5:00 PM</p>
+        </article>
+        <article class="rv"><svg viewBox="0 0 24 24">
+            <path d="M3 21V10l9-6 9 6v11z" />
+            <path d="M10 21v-6h4v6" />
+          </svg>
+          <h3>Venue</h3>
+          <p data-cfg="venue">The Enchanted Garden</p>
+        </article>
+        <article class="rv"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="10" r="3" />
+            <path d="M12 21c-5-5-7-8-7-11a7 7 0 0114 0c0 3-2 6-7 11z" />
+          </svg>
+          <h3>Address</h3>
+          <p data-cfg="address">123 Garden Avenue</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- MOMENTS GALLERY -->
+    <section class="moments" aria-labelledby="mmH">
+      <h2 id="mmH" class="script rv">Moments &amp; Muses</h2>
+      <div class="scatter">
+        <figure class="ph polaroid rv" data-label="Bouquet"><img data-src="images/stock/bouquet.jpg"
+            alt="A bouquet of white and pink roses">
+          <figcaption>Fresh blooms</figcaption>
+        </figure>
+        <figure class="ph polaroid rv" data-label="Aisle"><img data-src="images/stock/aisle.jpg"
+            alt="Outdoor wedding aisle with white drapes">
+          <figcaption>The aisle</figcaption>
+        </figure>
+        <figure class="ph polaroid rv" data-label="Table"><img data-src="images/stock/table.jpg"
+            alt="A reception table set for dinner">
+          <figcaption>Dinner under the stars</figcaption>
+        </figure>
+        <figure class="ph polaroid rv" data-label="Greenery"><img data-src="images/stock/greenery.jpg"
+            alt="Lush green leaves">
+          <figcaption>Evergreen</figcaption>
+        </figure>
+        <figure class="ph polaroid rv" data-label="Cake"><img data-src="images/stock/cake.jpg"
+            alt="A wedding cake with greenery">
+          <figcaption>Something sweet</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- DAY TIMELINE -->
+    <section class="day" aria-labelledby="dayH">
+      <h2 id="dayH" class="script rv">The Day Unfolds</h2>
+      <ol class="hours">
+        <li class="rv"><time>3:00 PM</time><span>Ceremony</span></li>
+        <li class="rv"><time>4:00 PM</time><span>Photo Session</span></li>
+        <li class="rv"><time>5:00 PM</time><span>Reception</span></li>
+        <li class="rv"><time>6:00 PM</time><span>Dinner</span></li>
+        <li class="rv"><time>7:00 PM</time><span>Wedding Program</span></li>
+        <li class="rv"><time>8:00 PM</time><span>Celebration</span></li>
+      </ol>
+    </section>
+
+    <!-- FULL-BLEED PHOTO BANNER -->
+    <section class="banner ph" data-label="Venue" aria-label="The venue">
+      <img data-src="images/stock/venue-wide.jpg" alt="A wide view of a garden wedding venue">
+      <blockquote class="rv">“Every love story is beautiful, but ours is our favorite.”<cite>Jane &amp; Joe</cite>
+      </blockquote>
+    </section>
+
+    <!-- ATTIRE -->
+    <section class="attire" aria-labelledby="atH">
+      <h2 id="atH" class="script rv">Dress Attire</h2>
+      <p class="code rv">Garden Formal</p>
+      <ul class="swatches rv">
+        <li><i style="--c:#A9BFA3"></i>Sage Green</li>
+        <li><i style="--c:#2F4A3A"></i>Forest Green</li>
+        <li><i style="--c:#F4EEDC"></i>Cream</li>
+        <li><i style="--c:#D8C7A8"></i>Beige</li>
+        <li><i style="--c:#8A6E4F"></i>Earth Tone</li>
+      </ul>
+      <p class="rv">Come dressed in your favorite garden-inspired formal attire and celebrate with us.</p>
+
+      <h3 class="sub rv">For the ladies</h3>
+      <div class="outfits">
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#A9BFA3">
+            <use href="#gown" />
+          </svg>
+          <figcaption><b>Sage Gown</b>Floor-length, flowing fabric</figcaption>
+        </figure>
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#2F4A3A">
+            <use href="#gown" />
+          </svg>
+          <figcaption><b>Forest Evening</b>Deep green with gold jewelry</figcaption>
+        </figure>
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#D8C7A8">
+            <use href="#gown" />
+          </svg>
+          <figcaption><b>Beige Elegance</b>Soft earth tones, midi or maxi</figcaption>
+        </figure>
+      </div>
+      <h3 class="sub rv">For the gentlemen</h3>
+      <div class="outfits">
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#2F4A3A;--t:#A9BFA3">
+            <use href="#suit" />
+          </svg>
+          <figcaption><b>Forest Suit</b>Sage tie or pocket square</figcaption>
+        </figure>
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#D8C7A8;--t:#2F4A3A">
+            <use href="#suit" />
+          </svg>
+          <figcaption><b>Beige Linen</b>Light and breezy, forest tie</figcaption>
+        </figure>
+        <figure class="rv"><svg viewBox="0 0 100 200" style="--c:#8A6E4F;--t:#F4EEDC">
+            <use href="#suit" />
+          </svg>
+          <figcaption><b>Earth Tone</b>Warm brown with cream accents</figcaption>
+        </figure>
+      </div>
+      <p class="note rv">Please avoid white and ivory, which are reserved for the bride. Grass venue: block heels or
+        flats are kindest to your feet.</p>
+    </section>
+
+    <!-- GUEST NOTES -->
+    <section class="notes" aria-labelledby="ntH">
+      <h2 id="ntH" class="script rv">Good to Know</h2>
+      <div class="rv">
+        <details>
+          <summary>Where should I park?</summary>
+          <p>Free guest parking is available at the garden entrance. Shuttle service runs from the main gate every 15
+            minutes.</p>
+        </details>
+        <details>
+          <summary>What if it rains?</summary>
+          <p>The ceremony moves to the covered pavilion. Bring a small umbrella just in case.</p>
+        </details>
+        <details>
+          <summary>Are children welcome?</summary>
+          <p>We love your little ones. Please let us know in your RSVP so we can set a seat for them.</p>
+        </details>
+        <details>
+          <summary>Can I take photos?</summary>
+          <p>Yes, after the ceremony. During the vows we invite you to be fully present and unplugged.</p>
+        </details>
+        <details>
+          <summary>Is there a gift registry?</summary>
+          <p>Your presence is the greatest gift. If you wish to give, a wishing well will be at the reception.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="rsvp" aria-labelledby="rsH">
+      <h2 id="rsH" class="script rv">Kindly Reply</h2>
+      <form id="rsvpForm" class="paper rv" novalidate>
+        <label>Full Name<input name="fullName" required autocomplete="name"></label>
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Contact Number<input name="contact" type="tel" required autocomplete="tel"></label>
+        <label>Number of Guests<input name="guests" type="number" min="1" max="10" value="1" required></label>
+        <fieldset>
+          <legend>Attendance</legend>
+          <label class="choice"><input type="radio" name="attendance" value="Joyfully Accepts" required><span>Joyfully
+              Accepts</span></label>
+          <label class="choice"><input type="radio" name="attendance" value="Regretfully Declines"><span>Regretfully
+              Declines</span></label>
+        </fieldset>
+        <label>Meal Preference
+          <select name="meal" required>
+            <option value="">Choose one</option>
+            <option>Chicken</option>
+            <option>Beef</option>
+            <option>Fish</option>
+            <option>Vegetarian</option>
+          </select>
+        </label>
+        <label>Message<textarea name="message" rows="3"></textarea></label>
+        <p class="status" id="rsvpStatus" role="status" aria-live="polite"></p>
+        <button class="btn" id="rsvpBtn" type="submit">Send RSVP</button>
+      </form>
+      <div class="thanks" id="thanks" hidden><svg viewBox="0 0 24 24">
+          <path d="M5 12l5 5 9-10" />
+        </svg>
+        <p>Thank you for being part of our special day.</p>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section class="place" aria-labelledby="plH">
+      <svg class="sprig rv">
+        <use href="#sprig" />
+      </svg>
+      <h2 id="plH" class="script rv" data-cfg="venue">The Enchanted Garden</h2>
+      <p class="rv" data-cfg="address">123 Garden Avenue</p>
+      <a class="btn rv" id="mapBtn" href="#" target="_blank" rel="noopener">View Location</a>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing" aria-label="Closing message">
+      <figure class="ph polaroid round rv" data-label="Together"><img data-src="images/stock/together.jpg"
+          alt="A couple walking hand in hand in a green garden"></figure>
+      <p class="big rv">Your presence is the greatest gift.</p>
+      <p class="rv">We can’t wait to celebrate this beautiful day with you.</p>
+      <p class="names rv"><span data-cfg="brideName">Jane</span> &amp; <span data-cfg="groomName">Joe</span></p>
+    </section>
+
+    <footer>
+      <strong><span data-cfg="brideName">Jane</span> &amp; <span data-cfg="groomName">Joe</span></strong>
+      <span data-cfg="dateLong">June 20, 2027</span>
+      <em>With love.</em>
+    </footer>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
