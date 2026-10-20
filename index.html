@@ -69,15 +69,15 @@
     <button class="btn" id="openBtn">Open the Door</button>
   </section>
 
-  <button class="music" id="music" aria-label="Mute music" aria-pressed="true" hidden>
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6">
-      <path d="M9 18V6l10-2v12" />
-      <circle cx="6.5" cy="18" r="2.5" />
-      <circle cx="16.5" cy="16" r="2.5" />
-      <path class="slash" d="M3 3l18 18" />
-    </svg>
+  <button class="music" id="music" aria-label="Play music" aria-pressed="false" hidden>
+    <span class="record" aria-hidden="true"><span class="record-label"></span></span>
   </button>
   <audio id="audio" src="music/wedding-song.mp3" loop preload="none"></audio>
+  <dialog class="image-preview" id="imagePreview" aria-label="Image preview">
+    <button class="image-preview-close" type="button" aria-label="Close image preview">&times;</button>
+    <img id="previewImage" alt="">
+    <p id="previewCaption"></p>
+  </dialog>
 
   <main id="main" aria-hidden="true">
 

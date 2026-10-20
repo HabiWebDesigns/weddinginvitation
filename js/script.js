@@ -33,9 +33,39 @@ function initPhotos() {
   $$("img[data-src]").forEach(img => {
     const holder = img.closest(".ph");
     img.loading = "lazy";
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", `View larger image: ${img.alt}`);
     img.addEventListener("load", () => holder && holder.classList.add("has-img"));
     img.addEventListener("error", () => img.remove());
     img.src = img.dataset.src;
+  });
+}
+
+/* ---------- Image preview ---------- */
+function initImagePreview() {
+  const dialog = $("#imagePreview"), preview = $("#previewImage"), caption = $("#previewCaption");
+  function openPreview(img) {
+    if (!img.naturalWidth) return;
+    preview.src = img.currentSrc || img.src;
+    preview.alt = img.alt;
+    caption.textContent = img.alt;
+    dialog.showModal();
+  }
+  document.addEventListener("click", e => {
+    const img = e.target.closest("img[data-src]");
+    if (img) openPreview(img);
+  });
+  document.addEventListener("keydown", e => {
+    const img = e.target.closest && e.target.closest("img[data-src]");
+    if (img && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      openPreview(img);
+    }
+  });
+  $(".image-preview-close", dialog).addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", e => {
+    if (e.target === dialog) dialog.close();
   });
 }
 
@@ -61,15 +91,16 @@ function createParticles(count = 24) {
 const audio = $("#audio"), musicBtn = $("#music");
 function setMusicState(on) {
   musicBtn.setAttribute("aria-pressed", on);
-  musicBtn.setAttribute("aria-label", on ? "Mute music" : "Play music");
+  musicBtn.setAttribute("aria-label", on ? "Pause music" : "Play music");
 }
 function playMusic() {
   audio.volume = 0.5;
   return audio.play().then(() => setMusicState(true)).catch(() => setMusicState(false));
 }
 function initMusic() {
-  audio.play().then(() => setMusicState(true)).catch(() => setMusicState(false)); // autoplay attempt
   musicBtn.addEventListener("click", () => audio.paused ? playMusic() : (audio.pause(), setMusicState(false)));
+  audio.addEventListener("play", () => setMusicState(true));
+  audio.addEventListener("pause", () => setMusicState(false));
 }
 
 /* ---------- Door sequence ---------- */
@@ -79,7 +110,6 @@ function initDoor() {
   let started = false;
   function open() {
     if (started) return; started = true;
-    playMusic();                                                    // fallback if autoplay was blocked
     door.classList.add("open");                                     // 1. doors swing inward
     setTimeout(() => intro.classList.add("go"), wait(1500));        // 2. walk through the doorway
     setTimeout(() => {                                              // 3. arrive in the garden
@@ -182,4 +212,4 @@ function initRsvp() {
   });
 }
 
-applyConfig(); initPhotos(); createParticles(); initMusic(); initDoor(); initReveal(); initCountdown(); initCalendar(); initRsvp();
+applyConfig(); initPhotos(); initImagePreview(); createParticles(); initMusic(); initDoor(); initReveal(); initCountdown(); initCalendar(); initRsvp();

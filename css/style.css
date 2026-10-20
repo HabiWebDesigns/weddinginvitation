@@ -376,28 +376,73 @@ section {
   right: 1rem;
   bottom: 1rem;
   z-index: 60;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: rgba(255, 253, 248, .92);
-  color: var(--forest);
+  border: 2px solid var(--paper);
+  padding: 5px;
+  background: var(--forest);
   cursor: pointer;
   display: grid;
   place-items: center;
-  box-shadow: var(--shadow)
+  box-shadow: 0 5px 20px rgba(47, 74, 58, .35);
+  transition: transform .25s, box-shadow .25s
 }
 
-.music[aria-pressed="true"] {
-  animation: glow 3s infinite
+.music[hidden] {
+  display: none
 }
 
-.music .slash {
-  opacity: 0
+.music:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(47, 74, 58, .45)
 }
 
-.music[aria-pressed="false"] .slash {
-  opacity: 1
+.record {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, #30312e 0 2px, #454641 3px 4px, #30312e 5px 6px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2)
+}
+
+.record-label {
+  position: absolute;
+  display: block;
+  inset: 34%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold) 0 12%, #f1dfb1 14% 22%, #9b7542 24% 100%);
+  border: 1px solid rgba(255, 255, 255, .5)
+}
+
+.record-label::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--forest)
+}
+
+.music[aria-pressed="true"] .record {
+  animation: record-spin 2.4s linear infinite
+}
+
+@keyframes record-spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .music[aria-pressed="true"] .record {
+    animation-duration: 8s
+  }
 }
 
 main {
@@ -424,6 +469,10 @@ main.shown {
 }
 
 /* ===== Photo slots: graceful fallback when image is missing ===== */
+img[data-src] {
+  cursor: zoom-in
+}
+
 .ph {
   position: relative;
   overflow: hidden;
@@ -455,6 +504,58 @@ main.shown {
   height: 100%;
   object-fit: cover;
   display: block
+}
+
+.ph img:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px
+}
+
+.image-preview {
+  position: fixed;
+  width: min(92vw, 1100px);
+  max-width: none;
+  max-height: 92vh;
+  padding: 3.5rem 1rem 1rem;
+  border: 1px solid rgba(185, 151, 91, .65);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--forest);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, .35)
+}
+
+.image-preview::backdrop {
+  background: rgba(20, 28, 23, .82);
+  backdrop-filter: blur(4px)
+}
+
+.image-preview img {
+  display: block;
+  width: 100%;
+  max-height: calc(92vh - 7rem);
+  object-fit: contain
+}
+
+.image-preview p {
+  padding-top: .5rem;
+  text-align: center;
+  font-size: 1rem
+}
+
+.image-preview-close {
+  position: absolute;
+  top: .5rem;
+  right: .75rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--forest);
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer
 }
 
 .polaroid {
@@ -1135,6 +1236,18 @@ main.shown {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem
+}
+
+@media(max-width:600px) {
+  .outfits {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .outfits figure:nth-child(3) {
+    grid-column: 1 / -1;
+    width: min(100%, 260px);
+    justify-self: center
+  }
 }
 
 .outfits figure {
