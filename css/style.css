@@ -173,6 +173,9 @@ section {
 .intro {
   position: fixed;
   inset: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -737,6 +740,25 @@ main.shown {
 }
 
 /* ===== Story ===== */
+.story {
+  isolation: isolate
+}
+
+.story::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: rgba(255, 253, 248, .62);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(185, 151, 91, .08), transparent 32%),
+    repeating-linear-gradient(45deg, rgba(47, 74, 58, .025) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(-45deg, rgba(185, 151, 91, .025) 0 1px, transparent 1px 5px)
+}
+
 .path {
   list-style: none;
   padding: 0;

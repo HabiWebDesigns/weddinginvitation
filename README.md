@@ -9,12 +9,12 @@ Static site in HTML, CSS and vanilla JavaScript. Works on GitHub Pages.
 - **Dress Attire** with illustrated sample outfits for ladies and gentlemen.
 - Scrolling ribbon and a "Good to Know" accordion.
 
-## Photos you need to add
-No photos are bundled. Each slot shows a soft green placeholder until the file exists, so nothing looks broken. Download free photos from [Unsplash](https://unsplash.com) (check each photo's license) and save them as:
+## Photo placeholders
+The image slots include locally bundled stock photos from [Unsplash](https://unsplash.com) as placeholders. Replace any file below with your own photo, keeping the same filename. If a file is removed, the page falls back to its soft green placeholder.
 
 | File | Used in | Search idea |
 |---|---|---|
-| `images/couple.jpg` | main arch frame | your own photo (portrait) |
+| `images/couple.jpg` | main arch frame | portrait; replace with your own photo |
 | `images/stock/gazebo.jpg` | polaroid beside couple | garden gazebo |
 | `images/stock/rings.jpg` | polaroid beside couple | wedding rings |
 | `images/stock/first-hello.jpg`, `beginning.jpg`, `journey.jpg`, `forever.jpg` | story | coffee cups, garden path, mountain road, couple sunset |
@@ -22,7 +22,7 @@ No photos are bundled. Each slot shows a soft green placeholder until the file e
 | `images/stock/venue-wide.jpg` | full-width banner | garden wedding venue (landscape) |
 | `images/stock/together.jpg` | closing | couple holding hands garden |
 
-Tip: resize to about 1200 px wide and keep each file under 300 KB. Music goes in `music/wedding-song.mp3`.
+Tip: resize replacements to about 1200 px wide and keep each file under 300 KB. Music goes in `music/wedding-song.mp3`.
 
 ## Customize
 Edit `weddingConfig` at the top of `js/script.js`. Story, timeline, FAQ and outfit text are in `index.html`.
